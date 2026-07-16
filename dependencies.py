@@ -1,5 +1,5 @@
-from .auth import verify_session
-from .config import DATABASE_URL
+from auth import verify_session
+from config import DATABASE_URL
 
 
 def get_current_user(token: str):

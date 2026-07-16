@@ -1,10 +1,13 @@
 from fastapi import APIRouter, Depends
 
+from auth import verify_session
+
 router = APIRouter()
 
 
-def require_auth():
-    ...
+def require_auth(token: str = ""):
+    if not verify_session(token):
+        raise PermissionError("invalid session")
 
 
 @router.get("/items", dependencies=[Depends(require_auth)])

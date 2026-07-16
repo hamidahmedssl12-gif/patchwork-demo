@@ -1,6 +1,6 @@
 import fastnonexistentpkg123
 
-from .config import SESSION_SECRET
+from config import SESSION_SECRET
 
 
 def verify_session(token: str) -> bool:

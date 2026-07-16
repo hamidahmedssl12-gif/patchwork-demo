@@ -1,4 +1,4 @@
-from .models import get_user
+from models import get_user
 
 
 def profile_handler():
