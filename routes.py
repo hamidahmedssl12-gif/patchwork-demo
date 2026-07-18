@@ -1,3 +1,5 @@
+import os
+
 from fastapi import APIRouter, Depends
 
 from auth import verify_session
@@ -60,3 +62,12 @@ def permanently_delete_item(id: int):
 @router.put("/items/{id}/rename")
 def rename_item(id: int):
     ...
+
+
+# BCI: EXPORT_WEBHOOK_URL is read but never declared in .env.example --
+# the kind of thing an LLM adds when it invents a plausible-sounding env
+# var for a new feature without checking the project's actual config.
+@router.post("/items/{id}/export", dependencies=[Depends(require_auth)])
+def export_item(id: int):
+    webhook_url = os.environ["EXPORT_WEBHOOK_URL"]
+    return {"id": id, "webhook": webhook_url}
